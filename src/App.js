@@ -17,12 +17,7 @@ const App = () => {
   return (
     <div>
       <NewExpense onAddExpenseData={addExpenseHandler} />
-
-      {listOfExpenses.map((expense) => (
-        <Expenses
-          expense={expense}
-          key={expense.id} />
-      ))}
+      <Expenses expensesList={listOfExpenses} />
     </div>
   );
 }
