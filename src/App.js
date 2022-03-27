@@ -4,8 +4,10 @@ import Expenses from './components/Expense/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
-  const [listOfExpenses, setExpenseToExpensesList] = useState([{ expenseDate: new Date(2020, 2, 24), expenseTitle: 'Car Insurance', expenseAmount: '1.00' }]);
-  
+  const [listOfExpenses, setExpenseToExpensesList] = useState([
+    { expenseDate: new Date(2020, 2, 24), expenseTitle: 'Car Insurance', expenseAmount: '10.00' }
+  ]);
+
   let addExpenseHandler = (expenseData) => {
     let expense = {
       expenseTitle: expenseData.title,
