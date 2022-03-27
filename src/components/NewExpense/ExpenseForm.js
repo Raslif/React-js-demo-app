@@ -9,6 +9,8 @@ const ExpenseForm = (props) => {
         enteredDate: ''
     });
 
+    const [isFormVisible, setIsFormVisible] = useState(false);
+
     let titleChangeHandler = (event) => {
         /* Use this approach when our state values update will happen based on previous state values */
         setInputs((prevState) => {
@@ -44,26 +46,41 @@ const ExpenseForm = (props) => {
         props.onSaveExpenseData(expenseData);
     }
 
+    let cancelClickHandler = () => {
+        setIsFormVisible((prevValue) => {
+            return !prevValue;
+        });
+    }
+
+    let addNewExpenseClickHandler = () => {
+        setIsFormVisible((prevValue) => {
+            return !prevValue;
+        });
+    }
+
     return (
-        <form onSubmit={expenseSubmitHandler}>
-            <div className="new-expense__controls">
-                <div className="new-expense__control">
-                    <label>Title</label>
-                    <input type='text' value={userInputs.enteredTitle} onChange={titleChangeHandler} />
+        isFormVisible ?
+            (<form onSubmit={expenseSubmitHandler}>
+                <div className="new-expense__controls">
+                    <div className="new-expense__control">
+                        <label>Title</label>
+                        <input type='text' value={userInputs.enteredTitle} onChange={titleChangeHandler} />
+                    </div>
+                    <div className="new-expense__control">
+                        <label>Amount</label>
+                        <input type='number' value={userInputs.enteredAmount} min='0.01' step='0.01' onChange={amountChangeHandler} />
+                    </div>
+                    <div className="new-expense__control">
+                        <label>Date</label>
+                        <input type='date' value={userInputs.enteredDate} min='2022-03-01' max='2022-03-27' onChange={dateChangeHandler} />
+                    </div>
                 </div>
-                <div className="new-expense__control">
-                    <label>Amount</label>
-                    <input type='number' value={userInputs.enteredAmount} min='0.01' step='0.01' onChange={amountChangeHandler} />
+                <div className="new-expense__actions">
+                    <button type="button" onClick={cancelClickHandler}>Cancel</button>
+                    <button type="submit">Add Expense</button>
                 </div>
-                <div className="new-expense__control">
-                    <label>Date</label>
-                    <input type='date' value={userInputs.enteredDate} min='2022-03-01' max='2022-03-27' onChange={dateChangeHandler} />
-                </div>
-            </div>
-            <div className="new-expense__actions">
-                <button type="submit">Add Expense</button>
-            </div>
-        </form>
+            </form>)
+            : (<button type="button" onClick={addNewExpenseClickHandler}>Add New Expense</button>)
     );
 }
 
