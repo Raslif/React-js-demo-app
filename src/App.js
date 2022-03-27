@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Expenses from './components/Expense/Expenses';
+import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
   let listOfExpenses = [
@@ -9,6 +11,8 @@ const App = () => {
 
   return (
     <div>
+      <NewExpense />
+      
       {listOfExpenses.map((expense) => (
         <Expenses
           expense={expense}
