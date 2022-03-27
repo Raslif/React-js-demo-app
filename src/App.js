@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Expenses from './components/Expense/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
-  let addExpenseHandler = (expenseDate) => {
-    console.log('From App.js');
-    console.log(expenseDate);
-  }
+  const [listOfExpenses, setExpenseToExpensesList] = useState([{ expenseDate: new Date(2020, 2, 24), expenseTitle: 'Car Insurance', expenseAmount: '1.00' }]);
+  
+  let addExpenseHandler = (expenseData) => {
+    let expense = {
+      expenseTitle: expenseData.title,
+      expenseAmount: expenseData.amount,
+      expenseDate: expenseData.date
+    };
 
-  let listOfExpenses = [
-    { id: 1, expenseDate: new Date(2022, 2, 24), expenseTitle: 'Car Insurance', expenseAmount: '80.00' },
-    { id: 2, expenseDate: new Date(2022, 2, 25), expenseTitle: 'Company Insurance', expenseAmount: '100.00' }
-  ];
+    setExpenseToExpensesList((previousExpenses) => {
+      let newlistOfExpenses = [expense, ...previousExpenses];
+      return newlistOfExpenses;
+    });
+  }
 
   return (
     <div>
